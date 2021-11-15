@@ -10,9 +10,16 @@ class Index extends Component
 {
     use WithPagination;
 
+
     protected $paginationTheme = 'bootstrap';
 
+    public $tweetId;
+
     public $perPage = 10;
+
+    protected $listener = ['tweetAdded'];
+
+    public function tweetAdded($tweetId){}
 
     public function loadMore()
     {
@@ -21,7 +28,7 @@ class Index extends Component
 
     public function render()
     {
-        $tweets = Tweet::latest()->paginate($this->perPage);
+        $tweets = Tweet::with('user')->latest()->paginate($this->perPage);
 
         return view('livewire.tweets.index', compact('tweets'));
     }
