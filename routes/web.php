@@ -17,5 +17,6 @@ Auth::routes();
 
 // Route::livewire('users/table', 'users.table')->layout('layouts.app');
 Route::get('users/table', \App\Http\Livewire\Users\Table::class);
+Route::get('products', \App\Http\Livewire\Products\Index::class);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

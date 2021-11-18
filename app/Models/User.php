@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "?d=mp&s=" . $size;
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Product::class, 'carts','user_id','product_id')->withTimestamps();
+    }
+
+    public function addedToCart(Product $product)
+    {
+        return $this->carts()->find($product->id);
+    }
 }
